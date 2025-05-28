@@ -4,6 +4,7 @@ import com.seuprojeto.revendas.dto.RevendaDTO;
 import com.seuprojeto.revendas.service.RevendaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,16 +25,19 @@ public class RevendaController {
 
     @GetMapping("/{id}")
     public ResponseEntity<RevendaDTO> buscarRevendaPorId(@PathVariable Long id) {
+        revendaService.buscarRevendaPorId(id);
         return null;
     }
 
-    @GetMapping
+    @GetMapping("/revendas")
     public ResponseEntity<List<RevendaDTO>> listarTodasRevendas() {
-        return null;
+        List<RevendaDTO> revendasDTO = revendaService.listarTodasRevendas();
+        return ResponseEntity.ok(revendasDTO);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletarUmaRevenda(@PathVariable Long id) {
-        return null;
+        revendaService.deletarUmaRevenda(id);
+        return ResponseEntity.noContent().build();
     }
 }

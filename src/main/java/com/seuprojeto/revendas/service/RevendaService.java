@@ -1,15 +1,18 @@
 package com.seuprojeto.revendas.service;
 
 import com.seuprojeto.revendas.dto.RevendaDTO;
+import com.seuprojeto.revendas.entity.Revenda;
+
+import java.util.List;
 
 public interface RevendaService {
 
     RevendaDTO cadastrarRevenda(final RevendaDTO revendaDTO);
 
-    RevendaDTO buscarRevendaPorId(final RevendaDTO revendaDTO);
+    RevendaDTO buscarRevendaPorId(final Long id);
 
-    RevendaDTO listarTodasRevendas();
+    List<RevendaDTO> listarTodasRevendas();
 
-    RevendaDTO deletarUmaRevenda(final Long id);
+    void deletarUmaRevenda(final Long id);
 
 }
