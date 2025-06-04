@@ -1,7 +1,6 @@
 package com.seuprojeto.revendas.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,7 +17,7 @@ public class Oportunidade {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -26,22 +25,16 @@ public class Oportunidade {
 
     private String motivoConclusao;
 
-    @NotBlank
     private String nomeCliente;
 
-    @NotBlank
     private String emailCliente;
 
-    @NotBlank
     private String telefoneCliente;
 
-    @NotBlank
     private String marcaVeiculo;
 
-    @NotBlank
     private String modeloVeiculo;
 
-    @NotBlank
     private String versaoVeiculo;
 
     private Integer anoModelo;

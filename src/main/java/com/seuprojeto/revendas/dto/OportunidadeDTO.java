@@ -12,8 +12,6 @@ import java.time.LocalDateTime;
 
 @RequiredArgsConstructor
 @Data
-@Builder
-
 public class OportunidadeDTO {
 
 

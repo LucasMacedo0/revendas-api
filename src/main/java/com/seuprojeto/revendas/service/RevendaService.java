@@ -9,10 +9,10 @@ public interface RevendaService {
 
     RevendaDTO cadastrarRevenda(final RevendaDTO revendaDTO);
 
-    RevendaDTO buscarRevendaPorId(final Long id);
+    RevendaDTO buscarRevendaPorId(final Integer id);
 
     List<RevendaDTO> listarTodasRevendas();
 
-    void deletarUmaRevenda(final Long id);
+    void deletarUmaRevenda(final Integer id);
 
 }

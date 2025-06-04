@@ -1,0 +1,29 @@
+version: '3.9'
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver_container
+    ports:
+      - "1433:1433"
+    environment:
+      SA_PASSWORD: "sat38012@"
+      ACCEPT_EULA: "Y"
+      MSSQL_AUTHENTICATION_MODE: "SQL"
+    volumes:
+      - sqlserver_data:/var/opt/mssql
+
+  db-init:
+    image: mcr.microsoft.com/mssql-tools
+    container_name: sqlserver_init
+    depends_on:
+      - sqlserver
+    entrypoint: /bin/bash -c "
+      sleep 20;
+      /opt/mssql-tools/bin/sqlcmd -S sqlserver -U SA -P 'sat38012@' -i /init.sql;
+      "
+    volumes:
+      - ./init.sql:/init.sql
+
+volumes:
+  sqlserver_data:

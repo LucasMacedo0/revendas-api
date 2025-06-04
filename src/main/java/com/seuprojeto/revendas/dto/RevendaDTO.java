@@ -7,16 +7,13 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.validator.constraints.br.CNPJ;
 
-@RequiredArgsConstructor
 @Data
-@Builder
 public class RevendaDTO {
 
-    private Long id;
+    private int id;
 
     @NotBlank(message = "O CNPJ é obrigatório")
     @Pattern(regexp = "\\d{14}", message = "CNPJ deve conter 14 dígitos numéricos")
-    @CNPJ
     private String cnpj;
 
     @NotBlank(message = "O nome social é obrigatório")

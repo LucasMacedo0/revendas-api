@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: revendas-api
+
+  datasource:
+    url: jdbc:sqlserver://localhost:1433;databaseName=revendasDB;encrypt=true;trustServerCertificate=true
+    username: SA
+    password: sat38012@
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+
+  jpa:
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl

@@ -1,3 +1,4 @@
+/*
 package com.seuprojeto.revendas.Controller;
 
 import com.seuprojeto.revendas.dto.UsuarioDTO;
@@ -38,3 +39,4 @@ public class UsuarioController {
     }
 
 }
+*/

@@ -16,17 +16,13 @@ public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
-    @NotBlank(message = "O nome é obrigatório")
     private String nome;
 
     @Column(nullable = false, unique = true)
-    @NotBlank(message = "O e-mail é obrigatório")
-    @Email(message = "E-mail inválido")
     private String email;
 
-    @NotBlank(message = "A senha é obrigatória")
     private String senha;
 
     @Enumerated(EnumType.STRING)

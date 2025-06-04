@@ -1,3 +1,4 @@
+/*
 package com.seuprojeto.revendas.Controller;
 
 import com.seuprojeto.revendas.dto.OportunidadeDTO;
@@ -47,3 +48,4 @@ public class OportunidadeController {
     }
 
 }
+*/

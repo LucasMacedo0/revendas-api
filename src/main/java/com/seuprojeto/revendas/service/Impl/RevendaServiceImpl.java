@@ -24,13 +24,23 @@ public class RevendaServiceImpl implements RevendaService {
             //TODO realizar tratamento de exception no lugar do RuntimeException aqui
             throw new RuntimeException("erro esse CNPJ já é cadastrado");
         });
-        Revenda novaRevenda = repository.save(objectMapper.convertValue(revendaDTO, Revenda.class));
-        return objectMapper.convertValue(novaRevenda, RevendaDTO.class);
+        Revenda entidade = new Revenda();
+        entidade.setCnpj(revendaDTO.getCnpj());
+        entidade.setNomeSocial(revendaDTO.getNomeSocial());
+
+        Revenda salva = repository.save(entidade);
+
+        RevendaDTO retorno = new RevendaDTO();
+        retorno.setId(salva.getId());
+        retorno.setCnpj(salva.getCnpj());
+        retorno.setNomeSocial(salva.getNomeSocial());
+
+        return retorno;
 
     }
 
     @Override
-    public RevendaDTO buscarRevendaPorId(Long id) {
+    public RevendaDTO buscarRevendaPorId(Integer id) {
         //TODO realizar tratamento de exception no lugar do RuntimeException aqui
         Revenda revenda = repository.findById(id).orElseThrow(() -> new RuntimeException("Revenda não encontrada"));
         return objectMapper.convertValue(revenda, RevendaDTO.class);
@@ -46,7 +56,7 @@ public class RevendaServiceImpl implements RevendaService {
     }
 
     @Override
-    public void deletarUmaRevenda(Long id) {
+    public void deletarUmaRevenda(Integer id) {
         repository.delete(repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Revenda não encontrada")));
 

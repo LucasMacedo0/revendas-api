@@ -10,8 +10,8 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Data
-@Builder
 public class UsuarioDTO {
+
     private Long id;
 
     @NotBlank(message = "O nome é obrigatório")

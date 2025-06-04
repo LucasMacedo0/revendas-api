@@ -5,7 +5,7 @@ import com.seuprojeto.revendas.entity.StatusOportunidade;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
-public interface OportunidadeRepository extends JpaRepository<Oportunidade, Long> {
+public interface OportunidadeRepository extends JpaRepository<Oportunidade, Integer> {
 
     List<Oportunidade> findByRevendaId(Long revendaId);
 
