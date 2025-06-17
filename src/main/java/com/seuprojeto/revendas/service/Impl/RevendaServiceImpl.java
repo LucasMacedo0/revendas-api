@@ -3,9 +3,11 @@ package com.seuprojeto.revendas.service.Impl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.seuprojeto.revendas.dto.RevendaDTO;
 import com.seuprojeto.revendas.entity.Revenda;
+import com.seuprojeto.revendas.exception.BusinessException;
 import com.seuprojeto.revendas.repository.RevendaRepository;
 import com.seuprojeto.revendas.service.RevendaService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,28 +23,18 @@ public class RevendaServiceImpl implements RevendaService {
     @Override
     public RevendaDTO cadastrarRevenda(RevendaDTO revendaDTO) {
         repository.findByCnpj(revendaDTO.getCnpj()).ifPresent(e -> {
-            //TODO realizar tratamento de exception no lugar do RuntimeException aqui
-            throw new RuntimeException("erro esse CNPJ já é cadastrado");
+            throw new BusinessException("Não é possível cadastrar: este CNPJ já existe.", "Conflito ao registrar CNPJ", HttpStatus.CONFLICT.toString());
         });
-        Revenda entidade = new Revenda();
-        entidade.setCnpj(revendaDTO.getCnpj());
-        entidade.setNomeSocial(revendaDTO.getNomeSocial());
 
-        Revenda salva = repository.save(entidade);
-
-        RevendaDTO retorno = new RevendaDTO();
-        retorno.setId(salva.getId());
-        retorno.setCnpj(salva.getCnpj());
-        retorno.setNomeSocial(salva.getNomeSocial());
-
-        return retorno;
+        var entidade = objectMapper.convertValue(revendaDTO, Revenda.class);
+        var salva = repository.save(entidade);
+        return objectMapper.convertValue(salva, RevendaDTO.class);
 
     }
 
     @Override
     public RevendaDTO buscarRevendaPorId(Integer id) {
-        //TODO realizar tratamento de exception no lugar do RuntimeException aqui
-        Revenda revenda = repository.findById(id).orElseThrow(() -> new RuntimeException("Revenda não encontrada"));
+        Revenda revenda = repository.findById(id).orElseThrow(() -> new BusinessException("Nenhuma revenda encontrada com este ID.", "Recurso não encontrado", HttpStatus.NOT_FOUND.toString()));
         return objectMapper.convertValue(revenda, RevendaDTO.class);
     }
 
@@ -58,7 +50,7 @@ public class RevendaServiceImpl implements RevendaService {
     @Override
     public void deletarUmaRevenda(Integer id) {
         repository.delete(repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Revenda não encontrada")));
+                .orElseThrow(() -> new BusinessException("Não possivel realizar deleção nenhuma revenda encontrada com este ID.", "Recurso não encontrado", HttpStatus.NOT_FOUND.toString())));
 
     }
 }

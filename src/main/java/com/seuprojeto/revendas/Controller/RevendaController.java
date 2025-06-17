@@ -2,6 +2,7 @@ package com.seuprojeto.revendas.Controller;
 
 import com.seuprojeto.revendas.dto.RevendaDTO;
 import com.seuprojeto.revendas.service.RevendaService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +18,7 @@ public class RevendaController {
     private final RevendaService revendaService;
 
     @PostMapping
-    public ResponseEntity<RevendaDTO> cadastrarRevenda(@RequestBody RevendaDTO revendaDTO) {
+    public ResponseEntity<RevendaDTO> cadastrarRevenda(@RequestBody @Valid RevendaDTO revendaDTO) {
         RevendaDTO response = revendaService.cadastrarRevenda(revendaDTO);
         return ResponseEntity.ok(response);
 
